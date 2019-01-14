@@ -5,12 +5,12 @@ package com.softs.mt.fragmentrcchallenge;
  */
 
 public class CarMan {
-    private int carLogo;
+    private String carLogo;
     private String carModel;
     private String ownerName;
     private String ownerTel;
 
-    public CarMan(int carLogo, String carModel, String ownerName, String ownderTel) {
+    public CarMan(String carLogo, String carModel, String ownerName, String ownderTel) {
         this.carLogo = carLogo;
         this.carModel = carModel;
         this.ownerName = ownerName;
@@ -18,11 +18,11 @@ public class CarMan {
 
     }
 
-    public int getCarLogo() {
+    public String getCarLogo() {
         return carLogo;
     }
 
-    public void setCarLogo(int carLogo) {
+    public void setCarLogo(String carLogo) {
         this.carLogo = carLogo;
     }
 

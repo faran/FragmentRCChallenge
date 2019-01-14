@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="right"
+              android:baselineAligned="false"
+              android:orientation="vertical"
+              tools:context="com.softs.mt.fragmentrcchallenge.ButtonFrag">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCarInfo"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:baselineAligned="false"
+            android:text="Car Info"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btnOwnerInfo"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="Owner Info"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</LinearLayout>

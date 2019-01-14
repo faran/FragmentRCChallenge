@@ -1,25 +1,25 @@
 package com.softs.mt.fragmentrcchallenge;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CarManAdapter.ItemClick{
 
-    RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
+
+    ArrayList<CarMan> cars;
     Button btnOwnerInfo, btnCarInfo;
-    TextView tvInfoName, tvInfoTel;
-
-    private ArrayList<CarMan> mCarManufacturersList;
-
-    CarManAdapter.ItemClick activity;
+    TextView tvInfoModel, tvName, tvTel;
+    ImageView ivMake;
+    FragmentManager mFragmentManager;
+    Fragment btnFrag, logolistFrag, infoFrag, ownerFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +28,62 @@ public class MainActivity extends AppCompatActivity implements CarManAdapter.Ite
 
         btnOwnerInfo = findViewById(R.id.btnOwnerInfo);
         btnCarInfo = findViewById(R.id.btnCarInfo);
-        tvInfoName = findViewById(R.id.tvInfoName);
-        tvInfoTel = findViewById(R.id.tvInfoTel);
+        ivMake = findViewById(R.id.ivMake);
+        tvInfoModel = findViewById(R.id.tvInfoModel);
+        tvName = findViewById(R.id.tvName);
+        tvTel = findViewById(R.id.tvTel);
 
-        mRecyclerView = findViewById(R.id.list);
-        mRecyclerView.setHasFixedSize(true);
+        mFragmentManager = getSupportFragmentManager();
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        logolistFrag = mFragmentManager.findFragmentById(R.id.logolistFrag);
+        btnFrag = mFragmentManager.findFragmentById(R.id.btnFrag);
+        infoFrag = mFragmentManager.findFragmentById(R.id.infoFrag);
+        ownerFrag = mFragmentManager.findFragmentById(R.id.detailFrag);
 
-        mCarManufacturersList = new ArrayList<>();
-        mCarManufacturersList.add(new CarMan(R.drawable.volkswagen, "POLO", "Chuck Nottis", "0987654321"));
-        mCarManufacturersList.add(new CarMan(R.drawable.mercedes, "E200", "Idris Elba","0987654321"));
-        mCarManufacturersList.add(new CarMan(R.drawable.nissan, "Almera", "Trevor Noah","0987654321"));
-        mCarManufacturersList.add(new CarMan(R.drawable.mercedes, "E180", "Ali Wong","0987654321"));
-        mCarManufacturersList.add(new CarMan(R.drawable.volkswagen, "GOLF", "Kathrne Ryan", "0987654321"));
-        mCarManufacturersList.add(new CarMan(R.drawable.nissan, "Prius", "Ryan", "0987654321"));
+        mFragmentManager.beginTransaction()
+                .show(btnFrag)
+                .show(logolistFrag)
+                .show(infoFrag)
+                .hide(ownerFrag)
+                .commit();
 
-        mAdapter = new CarManAdapter(this , mCarManufacturersList);
-        mRecyclerView.setAdapter(mAdapter);
+        btnOwnerInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragmentManager.beginTransaction()
+                        .hide(infoFrag)
+                        .show(ownerFrag)
+                        .commit();
+
+            }
+        });
+
+        btnCarInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragmentManager.beginTransaction()
+                        .show(infoFrag)
+                        .hide(ownerFrag)
+                        .commit();
+            }
+        });
+
+        onItemClicked(0);
 
     }
 
     @Override
     public void onItemClicked(int index) {
+        tvName.setText(ApplicationClass.cars.get(index).getOwnerName());
+        tvTel.setText(ApplicationClass.cars.get(index).getOwnerTel());
+        tvInfoModel.setText(ApplicationClass.cars.get(index).getCarModel());
 
+        if(ApplicationClass.cars.get(index).getCarLogo().equals("Volkswagen")){
+            ivMake.setImageResource(R.drawable.volkswagen);
+        }else if (ApplicationClass.cars.get(index).getCarLogo().equals("Mercedes")){
+            ivMake.setImageResource(R.drawable.mercedes);
+        }else{
+            ivMake.setImageResource(R.drawable.nissan);
+        }
     }
 }

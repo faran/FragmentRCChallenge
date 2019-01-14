@@ -9,10 +9,10 @@
 
 
     <fragment
-        android:id="@+id/fragment5"
+        android:id="@+id/logolistFrag"
         android:name="com.softs.mt.fragmentrcchallenge.LogoListFrag"
         android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,11 +25,19 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragment5"
+        app:layout_constraintStart_toEndOf="@+id/logolistFrag"
         app:layout_constraintTop_toTopOf="parent">
 
         <fragment
-            android:id="@+id/fragment6"
+            android:id="@+id/btnFrag"
+            android:name="com.softs.mt.fragmentrcchallenge.ButtonFrag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_button"/>
+
+        <fragment
+            android:id="@+id/infoFrag"
             android:name="com.softs.mt.fragmentrcchallenge.CarInfoFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +45,7 @@
             tools:layout="@layout/fragment_car_info"/>
 
         <fragment
-            android:id="@+id/fragment7"
+            android:id="@+id/detailFrag"
             android:name="com.softs.mt.fragmentrcchallenge.DetailFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

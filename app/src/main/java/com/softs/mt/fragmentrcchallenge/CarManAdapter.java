@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class CarManAdapter extends RecyclerView.Adapter<CarManAdapter.ViewHolder>{
 
-    private ArrayList<CarMan> carMan;
+    private ArrayList<CarMan> car;
     ItemClick activity;
 
     public interface ItemClick{
@@ -25,16 +25,14 @@ public class CarManAdapter extends RecyclerView.Adapter<CarManAdapter.ViewHolder
     }
 
     public CarManAdapter(Context context, ArrayList<CarMan> list){
-        carMan = list;
+        car = list;
         activity = (ItemClick) context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView ivLogo;
-        TextView tvModel, tvOwner;
-        ItemClick activity;
-
+        TextView tvModel, tvOwner, tvTel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -42,30 +40,42 @@ public class CarManAdapter extends RecyclerView.Adapter<CarManAdapter.ViewHolder
             ivLogo = itemView.findViewById(R.id.ivLogo);
             tvModel = itemView.findViewById(R.id.tvModel);
             tvOwner = itemView.findViewById(R.id.tvOwner);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.onItemClicked(car.indexOf(view.getTag()));
+                }
+            });
         }
     }
 
-
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public CarManAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_items, viewGroup, false);
 
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull CarManAdapter.ViewHolder viewHolder, int i) {
 
-        viewHolder.ivLogo.setImageResource(carMan.get(i).getCarLogo());
-        viewHolder.itemView.setTag(carMan.get(i));
-        viewHolder.tvModel.setText(carMan.get(i).getCarModel());
-        viewHolder.tvOwner.setText(carMan.get(i).getOwnerName());
+        viewHolder.itemView.setTag(car.get(i));
+        viewHolder.tvModel.setText(car.get(i).getCarModel());
+        viewHolder.tvOwner.setText(car.get(i).getOwnerName());
 
+        if(car.get(i).getCarLogo().equals("Volkswagen")){
+            viewHolder.ivLogo.setImageResource(R.drawable.volkswagen);
+        }else if(car.get(i).getCarLogo().equals("Mercedes")){
+            viewHolder.ivLogo.setImageResource(R.drawable.mercedes);
+        }else {
+            viewHolder.ivLogo.setImageResource(R.drawable.nissan);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return carMan.size();
+        return car.size();
     }
 }
